@@ -1,9 +1,23 @@
 import { Link } from "react-router-dom";
 import { FaPencilAlt } from "react-icons/fa";
 import { LuShoppingBag } from "react-icons/lu";
-import { login } from "../firebase-config";
+import { checkAuthState, login, logout } from "../firebase-config";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    checkAuthState((user) => {
+      setUser(user);
+    });
+  }, []);
+  const handleLogin = () => {
+    login().then((user) => setUser(user));
+  };
+  const handleLogout = () => {
+    logout().then((user) => setUser(user));
+  };
   return (
     <header className="border-b border-gray-300 flex p-4 justify-between">
       <Link
@@ -23,7 +37,18 @@ export default function NavBar() {
         <Link to="/products/new" className={"text-black"}>
           <FaPencilAlt />
         </Link>
-        <button onClick={login}>Login</button>
+        {!user && <button onClick={() => handleLogin()}>Login</button>}
+        {user && (
+          <div className="flex gap-2">
+            <img
+              src={user.photoURL}
+              alt="프로필 사진"
+              className="w-6 rounded-full"
+            />
+            {user.displayName}
+            <button onClick={() => handleLogout()}>Logout</button>
+          </div>
+        )}
       </nav>
     </header>
   );

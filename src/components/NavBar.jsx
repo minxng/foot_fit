@@ -6,17 +6,19 @@ import { useEffect, useState } from "react";
 
 export default function NavBar() {
   const [user, setUser] = useState();
-
+  const [isAdmin, setAdmin] = useState(false);
   useEffect(() => {
     checkAuthState((user) => {
       setUser(user);
+      if (!user) {
+        setAdmin(false);
+      }
     });
   }, []);
   const handleLogin = () => {
-    login().then((user) => setUser(user));
-  };
-  const handleLogout = () => {
-    logout().then((user) => setUser(user));
+    login().then((isAdmin) => {
+      setAdmin(isAdmin);
+    });
   };
   return (
     <header className="border-b border-gray-300 flex p-4 justify-between">
@@ -31,24 +33,32 @@ export default function NavBar() {
         <Link to="/products">
           <span>Products</span>
         </Link>
-        <Link to="/carts">
-          <span>Carts</span>
-        </Link>
-        <Link to="/products/new" className={"text-black"}>
-          <FaPencilAlt />
-        </Link>
-        {!user && <button onClick={() => handleLogin()}>Login</button>}
         {user && (
-          <div className="flex gap-2">
+          <Link to="/carts">
+            <span>Carts</span>
+          </Link>
+        )}
+        {isAdmin && (
+          <Link to="/products/new" className={"text-black"}>
+            <FaPencilAlt />
+          </Link>
+        )}
+        {user && (
+          <div className="flex items-center gap-1">
             <img
               src={user.photoURL}
               alt="프로필 사진"
-              className="w-6 rounded-full"
+              className="w-8 rounded-full"
             />
-            {user.displayName}
-            <button onClick={() => handleLogout()}>Logout</button>
+            <span className="hidden md:block">{user.displayName}</span>
           </div>
         )}
+        <button
+          className="bg-main text-white rounded px-4 py-2"
+          onClick={user ? logout : () => handleLogin()}
+        >
+          {user ? "Logout" : "Login"}
+        </button>
       </nav>
     </header>
   );

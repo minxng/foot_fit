@@ -20,13 +20,7 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const db = getDatabase();
 export async function login() {
-  return signInWithPopup(auth, provider).then(async (resp) => {
-    const starCountRef = ref(db, "admins");
-    const snapshot = await get(starCountRef);
-    const master_id = snapshot.val();
-    const isAdmin = master_id === resp.user.uid;
-    return isAdmin;
-  });
+  signInWithPopup(auth, provider).catch((error) => console.log(error));
 }
 
 export async function logout() {
@@ -34,5 +28,19 @@ export async function logout() {
 }
 
 export async function checkAuthState(callback) {
-  onAuthStateChanged(auth, callback);
+  onAuthStateChanged(auth, async (user) => {
+    const updated_user = user ? await checkAdminUser(user) : null;
+    callback(updated_user);
+  });
+}
+
+async function checkAdminUser(user) {
+  return get(ref(db, "admins")).then((snapshot) => {
+    if (snapshot.exists()) {
+      const admins = snapshot.val();
+      const isAdmin = admins.includes(user.uid);
+      return { ...user, isAdmin };
+    }
+    return user;
+  });
 }

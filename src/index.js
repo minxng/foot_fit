@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
+import ProtectedRoute from "./pages/ProtectedRoute";
 import AllProducts from "./pages/AllProducts";
 import NewProduct from "./pages/NewProduct";
 import ProductDetail from "./pages/ProductDetail";
@@ -25,10 +26,21 @@ const router = createBrowserRouter([
       },
       {
         path: "products/new",
-        element: <NewProduct />,
+        element: (
+          <ProtectedRoute requireAdmin>
+            <NewProduct />
+          </ProtectedRoute>
+        ),
       },
       { path: "products/:id", element: <ProductDetail /> },
-      { path: "carts", element: <Cart /> },
+      {
+        path: "carts",
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);

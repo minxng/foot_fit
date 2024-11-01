@@ -1,27 +1,14 @@
 import { Link } from "react-router-dom";
 import { FaPencilAlt } from "react-icons/fa";
 import { LuShoppingBag } from "react-icons/lu";
-import { checkAuthState, login, logout } from "../firebase-config";
-import { useEffect, useState } from "react";
+import Button from "./common/Button";
+import { useAuthContext } from "./context/AuthContext";
 
 export default function NavBar() {
-  const [user, setUser] = useState();
-  const [isAdmin, setAdmin] = useState(false);
-  useEffect(() => {
-    checkAuthState((user) => {
-      setUser(user);
-      if (!user) {
-        setAdmin(false);
-      }
-    });
-  }, []);
-  const handleLogin = () => {
-    login().then((isAdmin) => {
-      setAdmin(isAdmin);
-    });
-  };
+  const { user, loading, login, logout } = useAuthContext();
+
   return (
-    <header className="border-b border-gray-300 flex p-4 justify-between">
+    <header className="border-b border-gray-300 flex p-4 justify-between gap-4">
       <Link
         to="/"
         className={"text-xl font-medium text-main flex items-center gap-x-2"}
@@ -33,18 +20,18 @@ export default function NavBar() {
         <Link to="/products">
           <span>Products</span>
         </Link>
-        {user && (
+        {user && !loading && (
           <Link to="/carts">
             <span>Carts</span>
           </Link>
         )}
-        {isAdmin && (
+        {user && !loading && user.isAdmin && (
           <Link to="/products/new" className={"text-black"}>
             <FaPencilAlt />
           </Link>
         )}
-        {user && (
-          <div className="flex items-center gap-1">
+        {user && !loading && (
+          <div className="flex items-center gap-1 shrink-0">
             <img
               src={user.photoURL}
               alt="프로필 사진"
@@ -53,12 +40,10 @@ export default function NavBar() {
             <span className="hidden md:block">{user.displayName}</span>
           </div>
         )}
-        <button
-          className="bg-main text-white rounded px-4 py-2"
-          onClick={user ? logout : () => handleLogin()}
-        >
-          {user ? "Logout" : "Login"}
-        </button>
+        <Button
+          text={user ? "Logout" : "Login"}
+          onClick={user ? logout : login}
+        />
       </nav>
     </header>
   );

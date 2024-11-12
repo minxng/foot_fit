@@ -46,7 +46,6 @@ async function checkAdminUser(user) {
 }
 
 export async function addProduct(product) {
-  console.log(product);
   const id = Date.now();
   const { title, price, category, description, options, img } = product;
   return set(ref(db, "products/" + id), {
@@ -57,5 +56,14 @@ export async function addProduct(product) {
     description,
     options: options.split(","),
     img,
+  });
+}
+
+export function getProducts() {
+  return get(ref(db, "products")).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
+    return [];
   });
 }

@@ -4,14 +4,10 @@ import { useNavigate } from "react-router-dom";
 export default function Product({ product }) {
   const navigate = useNavigate();
   const { id, img, title, price, category } = product;
-  const handleProductDetail = (product) => {
-    console.log(product, "product");
-    navigate(`/products/${product.id}`, { state: product });
-  };
   return (
     <li
-      onClick={() => handleProductDetail(product)}
-      className="rounded-lg shadow-md overflow-hidden cursor-pointer"
+      onClick={() => navigate(`/products/${product.id}`, { state: product })}
+      className="rounded-lg shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105"
     >
       <div className="aspect-w-1 aspect-h-1 overflow-hidden">
         <img className="w-full h-full	object-cover" src={img} alt="상품 사진" />

@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getProducts } from "../api/firebase";
-import { useQuery } from "@tanstack/react-query";
 import Product from "../components/Product";
+import useProducts from "../hooks/useProducts";
 
 export default function AllProducts() {
-  const { isLoading, data: products } = useQuery({
-    queryKey: ["products"],
-    queryFn: () => getProducts(),
-    staleTime: 1000 * 60 * 5,
-  });
-
+  const {
+    productsQuery: { isLoading, data: products },
+  } = useProducts();
+  if (isLoading) return <p>상품을 가져오고 있습니다.</p>;
   return (
     <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {products &&

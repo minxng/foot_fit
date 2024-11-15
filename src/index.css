@@ -15,7 +15,9 @@ body {
 #root {
   @apply w-full max-w-screen-2xl;
 }
-
+li {
+  list-style: none;
+}
 a {
   text-decoration: none;
 }

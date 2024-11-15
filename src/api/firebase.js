@@ -83,7 +83,7 @@ export async function getCarts(id) {
   });
 }
 
-export async function deleteCartItem(userId, product) {
+export async function deleteCart(userId, product) {
   console.log(userId, product);
   return remove(ref(db, `carts/${userId}/${product.id}`));
 }

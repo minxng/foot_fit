@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../components/common/Button";
 import useCarts from "../hooks/useCarts";

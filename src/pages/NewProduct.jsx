@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { UploadImage } from "../api/upload-img";
 import Button from "../components/common/Button";
 import useProducts from "../hooks/useProducts";

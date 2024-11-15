@@ -1,18 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import { getCarts } from "../api/firebase";
-import { useAuthContext } from "../context/AuthContext";
 import CartItem from "../components/CartItem";
 import Button from "../components/common/Button";
 import PriceCard from "../components/PriceCard";
 import { FaPlus, FaEquals } from "react-icons/fa";
+import useCarts from "../hooks/useCarts";
 
 const SHIPPING_FEE = 3000;
 export default function Cart() {
-  const { uid } = useAuthContext();
-  const { isLoading, data: products } = useQuery({
-    queryKey: ["carts"],
-    queryFn: () => getCarts(uid),
-  });
+  const {
+    cartsQuery: { isLoading, data: products },
+  } = useCarts();
   const totalPrice =
     products &&
     products.reduce(
@@ -30,7 +26,7 @@ export default function Cart() {
       <ul className="border-b border-gray-300 mb-8 p-4 px-8">
         {products &&
           products.map((product) => (
-            <CartItem key={product.id} product={product} uid={uid} />
+            <CartItem key={product.id} product={product} />
           ))}
       </ul>
       <div className="flex justify-between items-center mb-6 px-2 md:px-8 lg:px-16">

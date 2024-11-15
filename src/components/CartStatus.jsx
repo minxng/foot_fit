@@ -1,14 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { IoCartOutline } from "react-icons/io5";
-import { getCarts } from "../api/firebase";
-import { useAuthContext } from "../context/AuthContext";
+import useCarts from "../hooks/useCarts";
 
 export default function CartStatus() {
-  const { uid } = useAuthContext();
-  const { data: products } = useQuery({
-    queryKey: ["carts"],
-    queryFn: () => getCarts(uid),
-  });
+  const {
+    cartsQuery: { data: products },
+  } = useCarts();
   return (
     <div className="relative">
       <IoCartOutline className="text-4xl" />

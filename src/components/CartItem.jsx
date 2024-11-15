@@ -1,26 +1,22 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { addCart, deleteCartItem } from "../api/firebase";
 import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
+import useCarts from "../hooks/useCarts";
 
 const ICON_STYLE_CLASS =
   "transition-all cursor-pointer hover:text-main hover:scale-105 mx-1";
-export default function CartItem({ product, uid }) {
-  const queryClient = useQueryClient();
+export default function CartItem({ product }) {
+  const { addCartItem, deleteCartItem } = useCarts();
   const handleMinusItem = () => {
     if (product.quantity < 2) return;
-    addCart(uid, { ...product, quantity: product.quantity - 1 }).then(() =>
-      resetQuery()
-    );
+    addCartItem.mutate({
+      product: { ...product, quantity: product.quantity - 1 },
+    });
   };
   const handlePlusItem = () =>
-    addCart(uid, { ...product, quantity: product.quantity + 1 }).then(() =>
-      resetQuery()
-    );
-  const handleDeleteItem = () =>
-    deleteCartItem(uid, product).then(() => resetQuery());
-  const resetQuery = () =>
-    queryClient.invalidateQueries({ queryKey: ["carts"] });
+    addCartItem.mutate({
+      product: { ...product, quantity: product.quantity + 1 },
+    });
+  const handleDeleteItem = () => deleteCartItem.mutate({ product });
   return (
     <li className="flex justify-between my-2 items-center">
       <img className="w-24 md:w-48 rounded-lg" src={product.img} alt="" />

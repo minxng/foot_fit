@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { FaPencilAlt } from "react-icons/fa";
 import { LuShoppingBag } from "react-icons/lu";
 import Button from "./common/Button";
-import { useAuthContext } from "./context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
+import CartStatus from "./CartStatus";
 
 export default function NavBar() {
   const { user, loading, login, logout } = useAuthContext();
-
   return (
     <header className="border-b border-gray-300 flex p-4 justify-between gap-4">
       <Link
@@ -22,12 +22,12 @@ export default function NavBar() {
         </Link>
         {user && !loading && (
           <Link to="/carts">
-            <span>Carts</span>
+            <CartStatus />
           </Link>
         )}
         {user && !loading && user.isAdmin && (
           <Link to="/products/new" className={"text-black"}>
-            <FaPencilAlt />
+            <FaPencilAlt className="text-2xl" />
           </Link>
         )}
         {user && !loading && (

@@ -6,21 +6,22 @@ export default function useCarts() {
   const queryClient = useQueryClient();
   const { uid } = useAuthContext();
   const cartsQuery = useQuery({
-    queryKey: ["carts"],
+    queryKey: ["carts", uid || ""],
     queryFn: () => getCarts(uid),
+    enabled: !!uid,
   });
 
   const addCartItem = useMutation({
     mutationFn: ({ product }) => addCart(uid, product),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["carts"] });
+      queryClient.invalidateQueries({ queryKey: ["carts", uid] });
     },
   });
 
   const deleteCartItem = useMutation({
     mutationFn: ({ product }) => deleteCart(uid, product),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["carts"] });
+      queryClient.invalidateQueries({ queryKey: ["carts", uid] });
     },
   });
   return { cartsQuery, addCartItem, deleteCartItem };

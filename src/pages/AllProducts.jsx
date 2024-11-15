@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../api/firebase";
 import { useQuery } from "@tanstack/react-query";
-import Product from "./Product";
+import Product from "../components/Product";
 
 export default function AllProducts() {
   const { isLoading, data: products } = useQuery({

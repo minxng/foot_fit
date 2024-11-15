@@ -1,12 +1,29 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../components/common/Button";
+import { addCart } from "../api/firebase";
+import { useAuthContext } from "../context/AuthContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ProductDetail() {
-  const { id, img, title, price, category, description, options } =
-    useLocation().state;
+  const queryClient = useQueryClient();
+  const { uid } = useAuthContext();
+  const {
+    state: { id, img, title, price, category, description, options },
+  } = useLocation();
   const [selected, setSelected] = useState(options && options[0]);
-  const handleClick = () => {};
+  const handleClick = () => {
+    addCart(uid, {
+      id,
+      img,
+      title,
+      price,
+      option: selected,
+      quantity: 1,
+    }).then(() => {
+      queryClient.invalidateQueries({ queryKey: ["carts"] });
+    });
+  };
   return (
     <>
       <p className="mx-12 mt-4 text-gray-700">{category}</p>

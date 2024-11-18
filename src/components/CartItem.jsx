@@ -24,7 +24,7 @@ export default function CartItem({ product }) {
         <div className="basis-3/5">
           <p className="text-lg">{product.title}</p>
           <p className="text-xl font-bold text-main">{product.option}</p>
-          <p>{product.price}</p>
+          <p>{product.price.toLocaleString()}</p>
         </div>
         <div className="flex items-center text-2xl">
           <CiSquareMinus

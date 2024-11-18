@@ -6,6 +6,9 @@ module.exports = {
       colors: {
         main: "#0e399d",
       },
+      maxHeight: {
+        "70vh": "70vh",
+      },
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],

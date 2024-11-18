@@ -30,9 +30,9 @@ export default function Cart() {
           ))}
       </ul>
       <div className="flex justify-between items-center mb-6 px-2 md:px-8 lg:px-16">
-        <PriceCard text="상품 총액" price={totalPrice} />
+        <PriceCard text="상품가" price={totalPrice} />
         <FaPlus className="shrink-0" />
-        <PriceCard text="배송액" price={SHIPPING_FEE} />
+        <PriceCard text="배송비" price={SHIPPING_FEE} />
         <FaEquals className="shrink-0" />
         <PriceCard text="총 가격" price={totalPrice + SHIPPING_FEE} />
       </div>

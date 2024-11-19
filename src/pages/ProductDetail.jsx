@@ -32,9 +32,9 @@ export default function ProductDetail() {
   };
   return (
     <>
-      <section className="flex flex-col md:flex-row p-4">
+      <section className="flex flex-col md:flex-row p-4 lg:w-2/3 w-full mx-auto my-0">
         <div className="w-full p-4 basis-7/12">
-          <img className="max-h-70vh mx-auto my-0" src={img} alt="상품 사진" />
+          <img className="max-h-70vh" src={img} alt="상품 사진" />
         </div>
         <div className="w-full p-4 basis-5/12 flex flex-col">
           <p className="text-gray-700">{category}</p>

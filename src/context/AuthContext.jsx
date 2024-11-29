@@ -12,6 +12,7 @@ export function AuthContextProvider({ children }) {
     console.log("check!");
     const stopListen = () => {
       checkAuthState((user) => {
+        console.log("?");
         if (user) {
           setAuthState({ user, loading: false });
         } else {

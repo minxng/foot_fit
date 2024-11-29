@@ -9,6 +9,7 @@ export function AuthContextProvider({ children }) {
   const user = authState.user;
   const loading = authState.loading;
   useEffect(() => {
+    console.log("check!");
     const stopListen = () => {
       checkAuthState((user) => {
         if (user) {

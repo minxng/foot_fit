@@ -29,7 +29,6 @@ export async function logout() {
 
 export async function checkAuthState(callback) {
   onAuthStateChanged(auth, async (user) => {
-    console.log("firebase in");
     const updated_user = user ? await checkAdminUser(user) : null;
     callback(updated_user);
   });
@@ -84,6 +83,5 @@ export async function getCarts(id) {
 }
 
 export async function deleteCart(userId, product) {
-  console.log(userId, product);
   return remove(ref(db, `carts/${userId}/${product.id}`));
 }

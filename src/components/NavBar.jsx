@@ -7,6 +7,7 @@ import CartStatus from "./CartStatus";
 
 export default function NavBar() {
   const { user, loading, login, logout } = useAuthContext();
+  console.log(user, "user");
   return (
     <header className="border-b border-gray-300 flex p-4 justify-between gap-4">
       <Link

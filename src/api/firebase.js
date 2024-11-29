@@ -76,8 +76,7 @@ export async function getCarts(id) {
   return get(ref(db, "carts")).then((snapshot) => {
     if (snapshot.val() && id) {
       const data = snapshot.val();
-      console.log(data, id);
-      return Object.values(data[id]);
+      return data[id] ? Object.values(data[id]) : [];
     }
     return [];
   });

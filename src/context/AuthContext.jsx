@@ -10,17 +10,17 @@ export function AuthContextProvider({ children }) {
   const loading = authState.loading;
   useEffect(() => {
     console.log("check!");
-    const stopListen = () => {
-      checkAuthState((user) => {
-        console.log("?");
-        if (user) {
-          setAuthState({ user, loading: false });
-        } else {
-          setAuthState({ user: null, loading: false });
-        }
-      });
-    };
-    return () => stopListen();
+    // const stopListen = () => {
+    checkAuthState((user) => {
+      console.log("?");
+      if (user) {
+        setAuthState({ user, loading: false });
+      } else {
+        setAuthState({ user: null, loading: false });
+      }
+    });
+    // };
+    // return () => stopListen();
   }, []);
   return (
     <AuthContext.Provider

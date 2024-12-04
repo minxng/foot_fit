@@ -38,14 +38,14 @@ export default function ProductDetail() {
   };
   return (
     <>
-      <section className="flex flex-col md:flex-row p-4 lg:w-2/3 w-full mx-auto my-0">
-        <div className="w-full p-4 basis-7/12">
-          <img className="max-h-70vh" src={img} alt="상품 사진" />
+      <section className="flex flex-col md:flex-row lg:p-4 lg:w-2/3 w-full mx-auto my-0">
+        <div className="w-full p-4">
+          <img className="w-full" src={img} alt="상품 사진" />
         </div>
-        <div className="w-full p-4 basis-5/12 flex flex-col">
+        <div className="w-full p-4 flex flex-col">
           <p className="text-gray-700">{category}</p>
-          <h3 className="text-3xl font-bold py-2">{title}</h3>
-          <p className="text-2xl font-bold py-2 border-b border-gray-400">
+          <h3 className="text-2xl lg:text-3xl font-bold py-2">{title}</h3>
+          <p className="text-xl lg:text-2xl font-bold py-2 border-b border-gray-400">
             {price.toLocaleString()}원
           </p>
           <div className="flex items-center">

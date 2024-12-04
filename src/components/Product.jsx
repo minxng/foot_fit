@@ -8,7 +8,7 @@ export default function Product({ product }) {
       onClick={() => navigate(`/products/${product.id}`, { state: product })}
       className="rounded-lg overflow-hidden cursor-pointer transition-all hover:scale-105"
     >
-      <div className="aspect-w-1 aspect-h-1 overflow-hidden">
+      <div>
         <img className="w-full h-full	object-cover" src={img} alt="상품 사진" />
       </div>
       <div className="mt-2 px-2 text-lg">

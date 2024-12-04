@@ -3,15 +3,21 @@ import { useLocation } from "react-router-dom";
 import Button from "../components/common/Button";
 import useCarts from "../hooks/useCarts";
 import CartConfirmModal from "../components/CartConfirmModal";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function ProductDetail() {
   const {
     state: { id, img, title, price, category, description, options },
   } = useLocation();
+  const { user } = useAuthContext();
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState(options && options[0]);
+  const [open, setOpen] = useState(false);
   const { addCartItem } = useCarts();
   const handleClick = () => {
+    if (!user) {
+      return alert("로그인 후 이용해주세요.");
+    }
     addCartItem.mutate(
       {
         product: {
@@ -56,7 +62,15 @@ export default function ProductDetail() {
             </select>
           </div>
           <Button text="장바구니에 추가" onClick={handleClick} />
-          <p className="py-4 text-lg">{description}</p>
+          <p className={`mt-4 text-md ${!open && "line-clamp-5"}`}>
+            {description}
+          </p>
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="my-2 py-2 bg-gray-50 rounded"
+          >
+            {open ? "접어두기" : "더보기"}
+          </button>
         </div>
       </section>
       {openModal && <CartConfirmModal />}

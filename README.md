@@ -13,4 +13,4 @@
   - 장바구니 추가 및 삭제
   - 권한별 기능 제한
 
-  https://goodbuyshop.netlify.app/
+https://foot-fit.netlify.app

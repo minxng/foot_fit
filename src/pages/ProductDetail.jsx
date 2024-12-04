@@ -42,7 +42,6 @@ export default function ProductDetail() {
           <p className="text-2xl font-bold py-2 border-b border-gray-400">
             {price.toLocaleString()}원
           </p>
-          <p className="py-4 text-lg">{description}</p>
           <div className="flex items-center">
             <label className="text-main font-bold" htmlFor="select">
               옵션:
@@ -57,6 +56,7 @@ export default function ProductDetail() {
             </select>
           </div>
           <Button text="장바구니에 추가" onClick={handleClick} />
+          <p className="py-4 text-lg">{description}</p>
         </div>
       </section>
       {openModal && <CartConfirmModal />}

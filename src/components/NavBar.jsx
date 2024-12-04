@@ -14,17 +14,12 @@ export default function NavBar() {
         className={"text-xl font-medium text-main flex items-center gap-x-2"}
       >
         <LuShoppingBag />
-        <h1>SHOP</h1>
+        <h1>FootFit</h1>
       </Link>
       <nav className="text-black flex items-center gap-x-4">
         <Link to="/products">
           <span>Products</span>
         </Link>
-        {user && !loading && (
-          <Link to="/carts">
-            <CartStatus />
-          </Link>
-        )}
         {user && !loading && user.isAdmin && (
           <Link to="/products/new" className={"text-black"}>
             <FaPencilAlt className="text-2xl" />
@@ -37,13 +32,17 @@ export default function NavBar() {
               alt="프로필 사진"
               className="w-8 rounded-full"
             />
-            <span className="hidden md:block">{user.displayName}</span>
           </div>
         )}
         <Button
-          text={user ? "Logout" : "Login"}
+          text={user ? "Log Out" : "Log In"}
           onClick={user ? logout : login}
         />
+        {user && !loading && (
+          <Link to="/carts">
+            <CartStatus />
+          </Link>
+        )}
       </nav>
     </header>
   );

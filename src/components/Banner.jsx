@@ -1,14 +1,17 @@
 export default function Banner() {
   return (
-    <section className="relative w-full h-52 overflow-hidden">
-      <img
-        className="w-full absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 blur-sm"
-        src={process.env.REACT_APP_BANNER_BACKGROUND_IMG}
-        alt=""
-      />
-      <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-        Der Ball ist rund und ein Spiel dauert 90 Minuten.
-      </p>
+    <section className="w-full overflow-hidden">
+      <picture>
+        <source
+          srcSet="https://cdn11.bigcommerce.com/s-5e8c3uvulz/images/stencil/1300w/image-manager/spurs-2425away-shop-desktopcategoryhero-mic.jpg?t=1719825574"
+          media="(min-width: 640px)"
+        />
+        <img
+          className="w-full"
+          src="https://cdn11.bigcommerce.com/s-5e8c3uvulz/images/stencil/480w/image-manager/spurs-2425away-shop-mobilecathero-sarr-6.jpg?t=1719825536"
+          alt=""
+        />
+      </picture>
     </section>
   );
 }

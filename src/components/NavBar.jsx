@@ -13,8 +13,7 @@ export default function NavBar() {
         to="/"
         className={"text-xl font-medium text-main flex items-center gap-x-2"}
       >
-        <LuShoppingBag />
-        <h1>FootFit</h1>
+        <img className="w-40" src={process.env.REACT_APP_LOGO} alt="로고" />
       </Link>
       <nav className="text-black flex items-center gap-x-4">
         <Link to="/products">

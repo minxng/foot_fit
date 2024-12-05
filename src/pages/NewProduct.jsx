@@ -2,6 +2,7 @@ import { useState } from "react";
 import { UploadImage } from "../api/upload-img";
 import Button from "../components/common/Button";
 import useProducts from "../hooks/useProducts";
+import { useNavigate } from "react-router-dom";
 
 export default function NewProduct() {
   const [imgUrl, setImgUrl] = useState();
@@ -9,11 +10,17 @@ export default function NewProduct() {
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState("");
   const { addNewProduct } = useProducts();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { title, price, category, description, options } = product;
+    if (!(imgUrl && title && price && category && description && options)) {
+      alert("모든 항목을 입력해주세요.");
+      return;
+    }
+
     setIsUploading(true);
-    if (!imgUrl) return;
     UploadImage(imgUrl)
       .then((res) => {
         if (res.data.url) {
@@ -23,10 +30,11 @@ export default function NewProduct() {
               onSuccess: () => {
                 setSuccess("제품을 등록하였습니다.");
                 setTimeout(() => {
-                  setSuccess(null);
-                  setProduct({});
-                  setImgUrl();
-                }, 5000);
+                  navigate("/products");
+                }, 1000);
+              },
+              onError: () => {
+                alert("제품 등록에 실패하였습니다.");
               },
             }
           );
@@ -51,7 +59,7 @@ export default function NewProduct() {
     setProduct({ ...product, [name]: value });
   };
   return (
-    <section className="w-full text-center">
+    <section className="lg:w-2/3 w-full text-center mx-auto pb-16">
       <h2 className="text-2xl font-bold my-4">새로운 제품 등록</h2>
       {success && <p className="my-2"> {success}</p>}
       <img className="w-96 mx-auto mb-2" src={imgUrl} alt="" />
@@ -101,7 +109,7 @@ export default function NewProduct() {
         <Button
           text={isUploading ? "업로드중..." : "제품 등록하기"}
           disabled={isUploading}
-        ></Button>
+        />
       </form>
     </section>
   );

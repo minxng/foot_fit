@@ -13,7 +13,7 @@ export default function Product({ product }) {
       </div>
       <div className="mt-2 px-2 text-lg">
         <h3>{title}</h3>
-        <p>{price.toLocaleString()}원</p>
+        <p className="text-base">{price.toLocaleString()}원</p>
       </div>
     </li>
   );

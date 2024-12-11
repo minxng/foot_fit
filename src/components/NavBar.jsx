@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { FaPencilAlt } from "react-icons/fa";
-import { LuShoppingBag } from "react-icons/lu";
 import Button from "./common/Button";
 import { useAuthContext } from "../context/AuthContext";
 import CartStatus from "./CartStatus";
@@ -8,14 +7,14 @@ import CartStatus from "./CartStatus";
 export default function NavBar() {
   const { user, loading, login, logout } = useAuthContext();
   return (
-    <header className="border-b border-gray-300 flex p-4 justify-between gap-4">
+    <header className="border-b border-gray-300 flex p-4 justify-between gap-4 sticky w-full top-0 bg-white z-10">
       <Link
         to="/"
         className={"text-xl font-medium text-main flex items-center gap-x-2"}
       >
         <img className="w-40" src={process.env.REACT_APP_LOGO} alt="로고" />
       </Link>
-      <nav className="text-black flex items-center gap-x-4">
+      <nav className="text-black flex items-center gap-x-6">
         <Link to="/products">
           <span>Products</span>
         </Link>

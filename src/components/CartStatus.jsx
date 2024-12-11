@@ -8,7 +8,7 @@ export default function CartStatus() {
   return (
     <div className="relative">
       <IoCartOutline className="text-4xl" />
-      <p className="absolute w-6 h-6 text-center bg-main text-white font-bold rounded-full -top-1 -right-2">
+      <p className="absolute w-6 h-6 text-center bg-main text-white font-medium rounded-full -top-1 -right-2">
         {products && products.length}
       </p>
     </div>

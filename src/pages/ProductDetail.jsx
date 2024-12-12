@@ -39,10 +39,10 @@ export default function ProductDetail() {
   return (
     <>
       <section className="flex flex-col md:flex-row lg:p-4 lg:w-2/3 w-full mx-auto my-0">
-        <div className="w-full p-4">
+        <div className="p-4 w-3/5">
           <img className="w-full" src={img} alt="상품 사진" />
         </div>
-        <div className="w-full p-4 flex flex-col gap-2">
+        <div className="w-2/5 p-4 flex flex-col gap-2">
           <p className="text-gray-700">{category}</p>
           <h3 className="text-xl lg:text-2xl font-medium py-2">{title}</h3>
           <p className="text-lg lg:text-xl font-medium py-2">
@@ -62,15 +62,20 @@ export default function ProductDetail() {
             </select>
           </div>
           <Button text="장바구니에 추가" onClick={handleClick} />
-          <p className={`mt-4 text-md ${!open && "line-clamp-5"}`}>
+          <h4
+            className="mt-4 flex justify-between items-center cursor-pointer font-semibold"
+            onClick={() => setOpen((v) => !v)}
+          >
+            상세정보
+            <span className="text-2xl px-4">{open ? "-" : "+"}</span>
+          </h4>
+          <p
+            className={`leading-6 break-keep text-sm ${
+              !open && "line-clamp-5"
+            }`}
+          >
             {description}
           </p>
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className="my-2 py-2 bg-gray-50 rounded"
-          >
-            {open ? "접어두기" : "더보기"}
-          </button>
         </div>
       </section>
       {openModal && <CartConfirmModal />}

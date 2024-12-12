@@ -18,7 +18,8 @@ export default function NavBar() {
         <Link to="/products">
           <span>Products</span>
         </Link>
-        {user && !loading && user.isAdmin && (
+        {/* && user.isAdmin */}
+        {user && !loading && (
           <Link to="/products/new" className={"text-black"}>
             <FaPencilAlt className="text-2xl" />
           </Link>
@@ -35,6 +36,7 @@ export default function NavBar() {
         <Button
           text={user ? "Log Out" : "Log In"}
           onClick={user ? logout : login}
+          bg={"bg-sub"}
         />
         {user && !loading && (
           <Link to="/carts">

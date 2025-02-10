@@ -18,12 +18,12 @@ export default function Cart() {
   const handleOnClick = () => {};
   if (isLoading) return <p>Loading...~</p>;
   return (
-    <section className="p-8 flex flex-col lg:w-2/3 w-full  mx-auto my-0 ">
-      <h3 className="text-2xl text-center font-bold pb-4 border-b border-gray-300">
+    <section className="p-4 sm:p-8 flex flex-col lg:w-2/3 w-full mx-auto my-0 ">
+      <h3 className="text-xl sm:text-2xl text-center font-bold pb-4 border-b border-gray-300">
         장바구니
       </h3>
       {products && !products.length && <p>장바구니가 비어 있습니다.</p>}
-      <ul className="border-b border-gray-300 mb-8 p-4 px-8">
+      <ul className="border-b border-gray-300 mb-8 py-4 sm:px-8">
         {products &&
           products.map((product) => (
             <CartItem key={product.id} product={product} />

@@ -39,10 +39,10 @@ export default function ProductDetail() {
   return (
     <>
       <section className="flex flex-col md:flex-row lg:p-4 lg:w-2/3 w-full mx-auto my-0">
-        <div className="p-4 w-3/5">
+        <div className="p-4 md:w-3/5 w-full">
           <img className="w-full" src={img} alt="상품 사진" />
         </div>
-        <div className="w-2/5 p-4 flex flex-col gap-2">
+        <div className="md:w-2/5 w-full p-4 flex flex-col md:gap-2">
           <p className="text-gray-700">{category}</p>
           <h3 className="text-xl lg:text-2xl font-medium py-2">{title}</h3>
           <p className="text-lg lg:text-xl font-medium py-2">

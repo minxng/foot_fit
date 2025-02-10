@@ -18,12 +18,14 @@ export default function CartItem({ product }) {
     });
   const handleDeleteItem = () => deleteCartItem.mutate({ product });
   return (
-    <li className="flex justify-between my-2 items-center">
+    <li className="flex justify-between my-4 items-center">
       <img className="w-24 md:w-48 rounded-lg" src={product.img} alt="" />
-      <div className="flex-1 flex justify-between ml-4">
+      <div className="flex-1 flex justify-between ml-4 flex-col sm:flex-row gap-2">
         <div className="basis-3/5">
-          <p className="text-lg">{product.title}</p>
-          <p className="text-xl font-bold text-main">{product.option}</p>
+          <p className="text-base sm:text-lg">{product.title}</p>
+          <p className="text-lg sm:text-xl font-bold text-main">
+            {product.option}
+          </p>
           <p>{product.price.toLocaleString()}</p>
         </div>
         <div className="flex items-center text-2xl">

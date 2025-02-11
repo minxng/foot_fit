@@ -19,6 +19,7 @@ export default function NavBar() {
         open={open}
         user={user}
         login={login}
+        logout={logout}
         closeMenu={closeMenu}
         loading={loading}
         className="sm:absolute sm:invisible"
